@@ -19,7 +19,7 @@ export class AccountEntity {
     return this._baseLineBalance;
   }
 
-  public get activityWindow(): unknown {
+  public get activityWindow(): ActivityWindowEntity {
     return this._activityWindow;
   }
 
@@ -37,6 +37,7 @@ export class AccountEntity {
 
     const withdrawal = new ActivityEntity(
       this.id,
+      this.id,
       targetAccountId,
       new Date(),
       money,
@@ -48,6 +49,7 @@ export class AccountEntity {
 
   public deposit(money: MoneyEntity, sourceAccountId: AccountId) {
     const deposit: ActivityEntity = new ActivityEntity(
+      sourceAccountId,
       sourceAccountId,
       this.id,
       new Date(),

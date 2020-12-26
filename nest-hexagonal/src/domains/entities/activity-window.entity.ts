@@ -17,12 +17,12 @@ export class ActivityWindowEntity {
   public calculateBalance(accountId: AccountId): MoneyEntity {
     const depositeBalance = this.activities
       .filter((activity) => activity.targetAccountId === accountId)
-      .map((activity) => activity.moneyEntity)
+      .map((activity) => activity.money)
       .reduce(MoneyEntity.add, MoneyEntity.ZERO());
 
     const withdrawalBalance = this.activities
       .filter((activity) => activity.sourceAccountId === accountId)
-      .map((activity) => activity.moneyEntity)
+      .map((activity) => activity.money)
       .reduce(MoneyEntity.add, MoneyEntity.ZERO());
 
     return MoneyEntity.add(depositeBalance, withdrawalBalance.negate());
