@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d6ae7a9-8af4-48ae-9b3b-5daf2a07e257" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../parallax-carousel/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/../parallax-carousel/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../parallax-carousel/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../parallax-carousel/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../parallax-carousel/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../parallax-carousel/src/App.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/django_sample.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
