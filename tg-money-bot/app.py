@@ -1,15 +1,15 @@
 import logging
-import os
+import config
 
 from aiogram import Bot, Dispatcher, executor, types
 
-API_TOKEN = os.getenv("TELEGRAM_API_TOKEN")
+from categories import Categories
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
 # Initialize bot and dispatcher
-bot = Bot(token=API_TOKEN)
+bot = Bot(token=config.API_TOKEN)
 dp = Dispatcher(bot)
 
 
@@ -34,6 +34,15 @@ async def del_expense(message: types.Message):
 @dp.message_handler(commands=['categories'])
 async def categories_list(message: types.Message):
     """Отправляет список категорий расходов"""
+    categories = Categories().get_all_categories()
+    answer_message = "Категории трат:\n\n* " + \
+                     ("\n* ".join([c.name + ' (' + ", ".join(c.aliases) + ')' for c in categories]))
+    await message.answer(answer_message)
+
+
+@dp.message_handler()
+async def add_expense(message: types.Message):
+    """Добавляет новый расход"""
     await message.answer(message.text)
 
 
@@ -52,12 +61,6 @@ async def month_statistics(message: types.Message):
 @dp.message_handler(commands=['expenses'])
 async def list_expenses(message: types.Message):
     """Отправляет последние несколько записей о расходах"""
-    await message.answer(message.text)
-
-
-@dp.message_handler()
-async def add_expense(message: types.Message):
-    """Добавляет новый расход"""
     await message.answer(message.text)
 
 

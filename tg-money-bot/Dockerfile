@@ -11,4 +11,4 @@ RUN pip install -U pip aiogram pytz && apt-get update && apt-get install sqlite3
 COPY *.py ./
 COPY createdb.sql ./
 
-ENTRYPOINT ["python", "main.py"]
+ENTRYPOINT ["python", "app.py"]

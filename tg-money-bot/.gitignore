@@ -7,3 +7,5 @@
 *.out
 .ipynb_checkpoints
 env/
+.env
+db/finance.db

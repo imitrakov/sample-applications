@@ -1,8 +1,22 @@
 import os
 import sqlite3
+from typing import Tuple, List
 
 conn = sqlite3.connect(os.path.join("db", "finance.db"))
 cursor = conn.cursor()
+
+
+def fetchall(table: str, columns: List[str]) -> List[Tuple]:
+    columns_joined = ", ".join(columns)
+    cursor.execute(f"SELECT {columns_joined} FROM {table}")
+    rows = cursor.fetchall()
+    result = []
+    for row in rows:
+        dict_row = {}
+        for index, column in enumerate(columns):
+            dict_row[column]=row[index]
+        result.append(dict_row)
+    return result
 
 
 def _init_db():
