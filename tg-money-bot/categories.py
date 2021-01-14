@@ -43,3 +43,18 @@ class Categories:
     def get_all_categories(self) -> List[Category]:
         """Возвращает список категорий"""
         return self._categories
+
+    def get_category(self, category_alias: str) -> Category:
+        """Возвращает категорию по алиасу"""
+        finded = None
+        other_category = None
+        for category in self._categories:
+            if category.codename == "other":
+                other_category = category
+            for aliases in category.aliases:
+                if category_alias in aliases:
+                    finded = category
+        if not finded:
+            finded = other_category
+
+        return finded
