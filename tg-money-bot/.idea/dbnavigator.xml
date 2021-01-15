@@ -27,7 +27,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="65793547-85d9-4a35-bcbb-de1f3ccead40">
-      <console name="Connection" type="STANDARD" schema="main" session="Main">Select * from category</console>
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[Select * from category]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

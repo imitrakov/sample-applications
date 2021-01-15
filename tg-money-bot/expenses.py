@@ -1,6 +1,6 @@
 import datetime
 import re
-from typing import NamedTuple, Optional
+from typing import NamedTuple, Optional, List
 
 import pytz
 
@@ -38,6 +38,13 @@ def add_expense(raw_message: str):
 
 def delete_expence(row_id: int) -> None:
     db.delete("expense", row_id)
+
+
+def last() -> List[Expense]:
+    """Возвращает последние несколько расходов"""
+    rows = db.last_expenses()
+    last_expenses = [Expense(id=row[0], amount=row[1], category_name=row[2]) for row in rows]
+    return last_expenses
 
 
 def _parse_message(raw_message: str) -> Message:

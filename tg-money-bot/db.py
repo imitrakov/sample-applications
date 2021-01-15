@@ -38,6 +38,15 @@ def delete(table: str, row_id: int):
     conn.commit()
 
 
+def last_expenses():
+    cursor.execute(
+        "select e.id, e.amount, c.name "
+        "from expense e left join category c "
+        "on c.codename=e.category_codename "
+        "order by created desc limit 10")
+    return fetchall();
+
+
 def _init_db():
     """Инициализирует БД"""
     with open("createdb.sql", "r") as f:
