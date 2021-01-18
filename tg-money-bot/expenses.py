@@ -42,9 +42,30 @@ def delete_expence(row_id: int) -> None:
 
 def last() -> List[Expense]:
     """Возвращает последние несколько расходов"""
-    rows = db.last_expenses()
+    rows = db.last_expenses(10)
     last_expenses = [Expense(id=row[0], amount=row[1], category_name=row[2]) for row in rows]
     return last_expenses
+
+
+def get_today_statistics() -> str:
+    """Возвращает строкой статистику расходов за сегодня"""
+    cursor = db.get_cursor()
+    cursor.execute("select sum(amount)"
+                   "from expense where date(created)=date('now', 'localtime')")
+    result = cursor.fetchone()
+    if not result[0]:
+        return "Сегодня ещё нет расходов"
+    all_today_expenses = result[0]
+    cursor.execute("select sum(amount) "
+                   "from expense where date(created)=date('now', 'localtime') "
+                   "and category_codename in (select codename "
+                   "from category where is_base_expense=true)")
+    result = cursor.fetchone()
+    base_today_expenses = result[0] if result[0] else 0
+    return (f"Расходы сегодня:\n"
+            f"всего — {all_today_expenses} руб.\n"
+            f"базовые — {base_today_expenses} руб. из {_get_budget_limit()} руб.\n\n"
+            f"За текущий месяц: /month")
 
 
 def _parse_message(raw_message: str) -> Message:
@@ -70,3 +91,8 @@ def _get_now_datetime() -> datetime.datetime:
     tz = pytz.timezone("Europe/Moscow")
     now = datetime.datetime.now(tz)
     return now
+
+
+def _get_budget_limit() -> int:
+    """Возвращает дневной лимит трат для основных базовых трат"""
+    return db.fetchall("budget", ["daily_limit"])[0]["daily_limit"]

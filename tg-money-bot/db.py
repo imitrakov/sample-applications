@@ -38,13 +38,18 @@ def delete(table: str, row_id: int):
     conn.commit()
 
 
-def last_expenses():
+def last_expenses(limit: int):
     cursor.execute(
-        "select e.id, e.amount, c.name "
-        "from expense e left join category c "
+        "SELECT e.id "
+        "FROM expense e JOIN category c "
         "on c.codename=e.category_codename "
-        "order by created desc limit 10")
-    return fetchall();
+        f"ORDER BY created desc limit {limit}"
+    )
+    return cursor.fetchall()
+
+
+def get_cursor():
+    return cursor
 
 
 def _init_db():

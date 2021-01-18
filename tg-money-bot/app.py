@@ -48,7 +48,8 @@ async def categories_list(message: types.Message):
 @dp.message_handler(commands=['today'])
 async def today_statistics(message: types.Message):
     """Отправляет сегодняшнюю статистику трат"""
-    await message.answer(message.text)
+    answer_message = expenses.get_today_statistics()
+    await message.answer(answer_message)
 
 
 @dp.message_handler(commands=['month'])
